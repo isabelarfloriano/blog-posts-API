@@ -6,20 +6,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     displayName: {
-      type: sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     password: {
-      type: sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     image: {
-      type: sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   }, {
