@@ -12,4 +12,15 @@ const login = async ({ email, password }) => {
   return token;
 };
 
-module.exports = { login };
+const create = async ({ displayName, email, password, image }) => {
+  const verifyEmail = await User.findOne({
+    where: { email },
+  });
+  if (verifyEmail) return null;
+
+  const user = await User.create({ displayName, email, password, image });
+  const token = tokenHelper.createToken({ email: user.email });
+  return token;
+};
+
+module.exports = { login, create };
