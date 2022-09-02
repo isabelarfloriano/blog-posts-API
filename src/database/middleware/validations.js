@@ -41,4 +41,16 @@ const createValidation = (req, res, next) => {
   next();
 };
 
-module.exports = { userValidation, createValidation };
+const categorySchema = joi.object({
+  name: joi.string().required().messages({
+    'any.required': '{#label} is required',
+  }),
+});
+
+const categoryValidation = (req, res, next) => {
+  const { error } = categorySchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.message });
+  next();
+};
+
+module.exports = { userValidation, createValidation, categoryValidation };
