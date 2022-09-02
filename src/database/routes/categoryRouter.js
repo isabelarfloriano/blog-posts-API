@@ -5,7 +5,7 @@ const authorization = require('../middleware/auth');
 
 const categoryRouter = Router();
 
-// categoryRouter.get('/', authorization);
+categoryRouter.get('/', authorization, categoryController.getAll);
 categoryRouter.post('/', authorization, validation.categoryValidation, categoryController.create);
 
 module.exports = categoryRouter;
