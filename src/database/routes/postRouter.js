@@ -7,5 +7,6 @@ const postController = require('../controllers/postController');
 const postRouter = Router();
 
 postRouter.post('/', authorization, validation.postValidation, categoryExist, postController.post);
+postRouter.get('/', authorization, postController.getAll);
 
 module.exports = postRouter;
