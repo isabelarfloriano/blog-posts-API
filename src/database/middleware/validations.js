@@ -53,4 +53,25 @@ const categoryValidation = (req, res, next) => {
   next();
 };
 
-module.exports = { userValidation, createValidation, categoryValidation };
+const postSchema = joi.object({
+  title: joi.string().required().messages({
+    'string.empty': REQUIRED_ERROR,
+    'any.required': REQUIRED_ERROR,
+  }),
+  content: joi.string().required().messages({
+    'string.empty': REQUIRED_ERROR,
+    'any.required': REQUIRED_ERROR,
+  }),
+  categoryIds: joi.array().required().messages({
+    'array.empty': REQUIRED_ERROR,
+    'any.required': REQUIRED_ERROR,
+  }),
+});
+
+const postValidation = (req, res, next) => {
+  const { error } = postSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.message });
+  next();
+};
+
+module.exports = { userValidation, createValidation, categoryValidation, postValidation };

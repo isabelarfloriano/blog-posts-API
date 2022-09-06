@@ -10,6 +10,7 @@ app.use(express.json());
 app.use('/login', routes.loginRouter);
 app.use('/user', routes.userRouter);
 app.use('/categories', routes.categoryRouter);
+app.use('/post', routes.postRouter);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`

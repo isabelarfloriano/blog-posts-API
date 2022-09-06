@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
       allowNull: false,
     },
     title: {
@@ -27,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
+    timestamps: false,
     tableName: 'BlogPosts'
   });
 
