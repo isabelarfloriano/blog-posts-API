@@ -11,4 +11,11 @@ const getAll = async (req, res) => {
   return res.status(200).json(posts);
 };
 
-module.exports = { post, getAll };
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const blogPost = await postService.getById(id);
+  if (!blogPost) return res.status(404).json({ message: 'Post does not exist' });
+  res.status(200).json(blogPost);
+};
+
+module.exports = { post, getAll, getById };

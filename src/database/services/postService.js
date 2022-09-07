@@ -32,4 +32,15 @@ const getAll = async () => {
   return posts;
 };
 
-module.exports = { post, getAll };
+const getById = async (id) => {
+  const blogPost = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' },
+    ],
+  });
+  if (!blogPost) return null;
+  return blogPost;
+};
+
+module.exports = { post, getAll, getById };
