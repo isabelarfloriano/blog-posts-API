@@ -9,6 +9,7 @@ const postRouter = Router();
 postRouter.post('/', authorization, validation.postValidation, categoryExist, postController.post);
 postRouter.get('/', authorization, postController.getAll);
 postRouter.get('/:id', authorization, postController.getById);
+postRouter.put('/:id', authorization, validation.updateValidation, postController.updatePost);
 postRouter.delete('/:id', authorization, postController.deletePost);
 
 module.exports = postRouter;

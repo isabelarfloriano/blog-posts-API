@@ -43,6 +43,18 @@ const getById = async (id) => {
   return blogPost;
 };
 
+const updatePost = async ({ id, title, content, userId }) => {
+  const blogPost = await BlogPost.findOne({ where: { id, userId },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' },
+    ],
+  });
+  if (!blogPost) return 'denied';
+  blogPost.update({ title, content });
+  return blogPost;
+};
+
 const deletePost = async ({ id, userId }) => {
   const exist = await BlogPost.findOne({ where: { id } });
   if (!exist) return 'nonexistent';
@@ -50,4 +62,4 @@ const deletePost = async ({ id, userId }) => {
   if (!result) return 'denied';
 };
 
-module.exports = { post, getAll, getById, deletePost };
+module.exports = { post, getAll, getById, deletePost, updatePost };

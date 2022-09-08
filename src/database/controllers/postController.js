@@ -18,6 +18,14 @@ const getById = async (req, res) => {
   return res.status(200).json(blogPost);
 };
 
+const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const blogPost = await postService.updatePost({ id, title, content, userId: req.userId });
+  if (blogPost === 'denied') return res.status(401).json({ message: 'Unauthorized user' });
+  return res.status(200).json(blogPost);
+};
+
 const deletePost = async (req, res) => {
   const { id } = req.params;
   const result = await postService.deletePost({ id, userId: req.userId });
@@ -26,4 +34,4 @@ const deletePost = async (req, res) => {
   return res.status(204).end();
 };
 
-module.exports = { post, getAll, getById, deletePost };
+module.exports = { post, getAll, getById, deletePost, updatePost };
