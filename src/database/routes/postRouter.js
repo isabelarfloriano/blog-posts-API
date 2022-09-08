@@ -7,6 +7,7 @@ const postController = require('../controllers/postController');
 const postRouter = Router();
 
 postRouter.post('/', authorization, validation.postValidation, categoryExist, postController.post);
+postRouter.get('/search', authorization, postController.searchPost);
 postRouter.get('/', authorization, postController.getAll);
 postRouter.get('/:id', authorization, postController.getById);
 postRouter.put('/:id', authorization, validation.updateValidation, postController.updatePost);
